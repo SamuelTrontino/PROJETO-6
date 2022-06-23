@@ -41,10 +41,12 @@ function draw() {
 
    if(estadojogo==="start"){
     text("aperte espaço para começar", 60, 160);
+    tacoJogador.x = 200,
+    tacoJogador.y = 350
    }
    else if(estadojogo==="fim"){
     text("game over",200,200)
-    text("enter para reiniciar,50,90");
+    text("r para reiniciar",50,90);
    }else{
     gameplay()
 
@@ -55,7 +57,7 @@ function draw() {
     line(i, 200, i+10, 200);
   }
     //apertar espaço pra começar o jogo
-    if (keyDown("space")) {
+    if (keyDown("space")&& estadojogo == "start") {
       atacante.velocityX = 4;
       atacante.velocityY = 3;
       estadojogo = "jogar"
@@ -80,20 +82,20 @@ function gameplay(){
     tacoJogador.velocityX = +10;
   }
 
-  //reiniciar  
+  //reiniciar não esta funcionando  
 
   if (placarComputador===2||placarJogador===2) {
    
     estadojogo="fim";
-
-    if (keyDown("r") && "estadojogo" === "fim")
+    }
+    if (keyDown("r") && estadojogo === "fim")
     {
      estadojogo = "start";
      placarComputador = 0;
      placarJogador = 0;
     }
   
-  }
+  
   
     //bola toca no gol volta no 200 200
     if (atacante.isTouching(gol1) || atacante.isTouching(gol2)) {
@@ -113,6 +115,7 @@ function gameplay(){
       tacoComputador.y = 50;
       tacoComputador.velocityX = 0;
       tacoComputador.velocityY = 0;
+      estadojogo = "start"
     }
 
 }
